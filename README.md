@@ -11,18 +11,23 @@
 ```ts
 import React, { useEffect, useRef } from "react";
 
+interface Props {
+  children: React.ReactNode;
+  onContentEndVisible: () => void;
+}
 // Опишіть Props
 export function Observer({ children, onContentEndVisible }: Props) {
   // Вкажіть правильний тип для useRef зверніть увагу, в який DOM елемент ми його передаємо
-  const endContentRef = useRef(null);
+  const endContentRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    interface IOptions {
+      rootMargin: string;
+      threshold: number;
+      root: null;
+    }
     // Вкажіть правильний тип для options, підказка, клас також можна вказувати як тип
-    const options = {
-      rootMargin: "0px",
-      threshold: 1.0,
-      root: null,
-    };
+    const options: IOptions;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -65,6 +70,11 @@ Action: Це тип, що представляє можливі дії, які �
 
 ```ts
 import React, { useReducer } from "react";
+
+interface State {
+  isRequestInProgress: boolean;
+  requestStep: string;
+}
 
 const initialState: State = {
   isRequestInProgress: false,
@@ -125,12 +135,12 @@ export default RequestComponent;
 Ви створюєте компонент форми у React. Ви маєте поле введення, в якому ви хочете відстежити зміни. Для цього ви використовуєте обробник подій onChange. Ваше завдання – правильно типізувати подію, яка передається у цю функцію.
 
 ```ts
-import React, { useState } from "react";
+import React, { useState, ChengeEvent } from "react";
 
 export function FormComponent() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChengeEvent) => {
     setValue(event.target.value);
   };
 
