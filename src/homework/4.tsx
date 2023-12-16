@@ -7,7 +7,7 @@ type Menu = { id: MenuIds; title: string };
 type SelectedMenu = { id: MenuIds }; 
  
 const MenuSelectedContext = createContext<{ selectedMenu: SelectedMenu }>({ 
-  selectedMenu: {}, 
+  selectedMenu: {id: "first"}, 
 }); 
  
 type MenuAction = { onSelectedMenu: (menu: SelectedMenu) => void }; 
